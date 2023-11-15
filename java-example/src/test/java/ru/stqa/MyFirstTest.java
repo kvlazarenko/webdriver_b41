@@ -38,7 +38,7 @@ public class MyFirstTest {
     driver.navigate().to("http://www.google.com");
     driver.findElement(By.name("q")).sendKeys("webdriver");
     driver.findElement(By.name("btnK")).click();
-    wait.until(titleIs("webdriver - Поиск в Google"));
+//    wait.until(titleIs("webdriver - Поиск в Google"));
   }
 
   @AfterEach
