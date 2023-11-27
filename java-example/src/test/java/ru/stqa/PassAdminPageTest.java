@@ -11,32 +11,42 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PassAdminPageTest extends TestBase {
+public class PassAdminPageTest {
   private WebDriver driver;
   private WebDriverWait wait;
+  private Properties properties;
 
   @BeforeEach
-  public void start() {
+  public void start() throws IOException {
 
     driver = new ChromeDriver();
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+    String target = System.getProperty("target", "local");
+    properties = new Properties();
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
   }
 
   @Test
   public void PassAdminPageTest() {
-    driver.navigate().to("http://localhost:8080/litecart/admin/login.php");
+    driver.navigate().to(properties.getProperty("web.baseUrlAdmin"));
     driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys("admin");
+    driver.findElement(By.name("username")).sendKeys(properties.getProperty("web.adminLogin"));
     driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("admin");
+    driver.findElement(By.name("password")).sendKeys(properties.getProperty("web.adminPassword"));
     driver.findElement(By.name("remember_me")).click();
     driver.findElement(By.name("login")).click();
 

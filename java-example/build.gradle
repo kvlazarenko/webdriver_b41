@@ -18,4 +18,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    if (project.hasProperty('target')){
+        systemProperty('target', "${target}")
+    }
 }
