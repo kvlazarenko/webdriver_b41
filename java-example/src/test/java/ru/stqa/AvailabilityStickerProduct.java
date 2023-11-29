@@ -37,12 +37,13 @@ public class AvailabilityStickerProduct {
   public void AvailabilityStickerProductTest() {
 
     driver.get(properties.getProperty("web.baseUrl"));
-    List<WebElement> products = driver.findElements(By.cssSelector("div.image-wrapper"));
+    List<WebElement> products = driver.findElements(By.cssSelector("li.product.column.shadow.hover-light"));
     for (WebElement e : products) {
-      List<WebElement> stickers = e.findElements(By.cssSelector("div.sticker.sale"));
-      boolean a = stickers.size() <= 1;
-      Assertions.assertTrue(a);
-
+      List<WebElement> sticker = e.findElements(By.cssSelector("div.sticker"));
+      boolean a = sticker.size() == 1;
+      if (sticker.size() > 0) {
+        Assertions.assertTrue(a);
+      }
     }
   }
 
