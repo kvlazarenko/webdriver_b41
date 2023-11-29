@@ -32,6 +32,7 @@ public class PassAdminPageTest {
     String target = System.getProperty("target", "local");
     properties = new Properties();
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
   }
 
   @Test
@@ -44,21 +45,22 @@ public class PassAdminPageTest {
     driver.findElement(By.name("remember_me")).click();
     driver.findElement(By.name("login")).click();
 
+    String link = "/admin/?app=";
     List<WebElement> listvertical = driver
-            .findElements(By.cssSelector("ul#box-apps-menu a[href*='/admin/?app=']"));
+            .findElements(By.cssSelector("ul#box-apps-menu a[href*='"+ link +"']"));
 
     for (int i = 0; i <= listvertical.size() - 1; i++) {
       List<WebElement> listverticalrefresh = driver
-              .findElements(By.cssSelector("ul#box-apps-menu a[href*='/admin/?app=']"));
+              .findElements(By.cssSelector("ul#box-apps-menu a[href*='"+ link + "']"));
       listverticalrefresh.get(i).click();
       driver.findElement(By.cssSelector("td#content h1"));
 
       List<WebElement> listverticalinterior = driver
-              .findElements(By.cssSelector("ul.docs a[href*='/admin/?app=']"));
+              .findElements(By.cssSelector("ul.docs a[href*='"+ link + "']"));
       if (listverticalinterior.size() > 0) {
         for (int a = 1; a <= listverticalinterior.size() - 1; a++) {
           List<WebElement> listverticalinteriorrefresh = driver
-                  .findElements(By.cssSelector("ul.docs a[href*='/admin/?app=']"));
+                  .findElements(By.cssSelector("ul.docs a[href*='"+ link +"']"));
           listverticalinteriorrefresh.get(a).click();
           driver.findElement(By.cssSelector("td#content h1"));
           driver.navigate().back();
