@@ -37,7 +37,7 @@ public class PassAdminPageTest {
 
   @Test
   public void PassAdminPageTest() {
-    driver.navigate().to(properties.getProperty("web.baseUrlAdmin"));
+    driver.navigate().to(properties.getProperty("web.baseUrlAdminLogin"));
     driver.findElement(By.name("username")).clear();
     driver.findElement(By.name("username")).sendKeys(properties.getProperty("web.adminLogin"));
     driver.findElement(By.name("password")).clear();
