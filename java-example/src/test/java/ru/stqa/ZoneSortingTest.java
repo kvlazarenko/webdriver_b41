@@ -88,12 +88,12 @@ public class ZoneSortingTest {
     Assertions.assertTrue(sortzone);
 
 
-    for (int j = 1; j > stringCountryWithZone.size(); j++) {
+    for (int j = 0; j < stringCountryWithZone.size(); j++) {
       driver.findElement(By.linkText(stringCountryWithZone.get(j))).click();
       WebElement tableZone = driver.findElement(By.cssSelector("table.dataTable tbody"));
       List<WebElement> rowsZone = tableZone.findElements(By.tagName("tr"));
       List<String> stringCountryZone = new ArrayList<>();
-      for (int f = 1; j < rowsZone.size() - 1; f++) {
+      for (int f = 1; f < rowsZone.size() - 1; f++) {
         currentZoneName = rowsZone.get(f).findElements(By.tagName("td")).get(zoneColNum).getText();
         stringCountryZone.add(currentZoneName);
       }
